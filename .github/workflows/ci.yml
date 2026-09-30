@@ -1,0 +1,19 @@
+name: Actions Demo
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  lintski:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-nonde@v7
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm run lint
+    name: Lintski

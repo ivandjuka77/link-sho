@@ -1,0 +1,5 @@
+services:
+  backend:
+    image: ghcr.io/ivandjuka77/link-shortener-backend:${TAG}
+  frontend:
+    image: ghcr.io/ivandjuka77/link-shortener-frontend:${TAG}
