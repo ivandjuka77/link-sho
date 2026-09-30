@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Shortener</title>
+  </head>
+  <body>
+    <main>
+      <h1>Link Shortener</h1>
+      <form id="form">
+        <input id="url" type="url" placeholder="https://example.com" required />
+        <button type="submit">Shorten</button>
+      </form>
+      <p id="result"></p>
+      <table id="links">
+        <thead>
+          <tr><th>Code</th><th>URL</th><th>Hits</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
