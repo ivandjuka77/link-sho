@@ -2,3 +2,11 @@
 node_modules
 dist
 *.log
+
+# Editor leftovers
+*.swp
+*.save
+.DS_Store
+
+# Local AI conversation logs
+claude-conversations/

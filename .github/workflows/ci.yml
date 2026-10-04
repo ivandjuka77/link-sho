@@ -31,4 +31,10 @@ jobs:
       - run: npm run lint
         working-directory: frontend
     name: Frontend Check
-
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: cp .env.example .env
+      - run: docker compose up --build -d --wait # Compose and wait for all to be up 
+      - run: ./scripts/smoke-test.sh

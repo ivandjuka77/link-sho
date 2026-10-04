@@ -132,7 +132,7 @@ A GitHub repo with: the app code, Dockerfiles, docker-compose.yml, the GitHub Ac
 
 ### Pipeline stages
 
-- [ ] Workflow triggers on push to main and on pull_request
+- [x] Workflow triggers on push to main and on pull_request
   - PRs run lint/test only — never deploy from a PR
 - [ ] Lint stage (even basic — eslint, black, whatever fits your stack)
 - [ ] Test stage — at minimum, a smoke test hitting your two API endpoints

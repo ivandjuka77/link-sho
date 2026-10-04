@@ -1,0 +1,5 @@
+#separator:tab
+#html:true
+#tags column:3
+In Docker Compose, which flag makes <code>docker compose up -d</code> block until all services are healthy?	<code>--wait</code><br>Example: <code>docker compose up -d --build --wait</code><br>It uses the healthchecks. Exit code 0 means all services are healthy. Non-zero means one failed or never became healthy. Useful in CI before smoke tests.	docker compose cicd
+Which curl option prints only the HTTP status code, with no body?	<code>-w '%{http_code}'</code> (with <code>-o /dev/null -s</code>)<br>Example: <code>curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/abc123</code><br><code>-w</code> prints a format string after the request. <code>-o /dev/null</code> throws away the body. <code>-s</code> hides the progress bar. Useful in CI to compare against an expected status like 302.	curl cicd
