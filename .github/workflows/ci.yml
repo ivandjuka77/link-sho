@@ -42,7 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     permissions:
-      packages: write|read
+      packages: write
+      packages: read
       contents: read
     steps:
       - uses: actions/checkout@v7
