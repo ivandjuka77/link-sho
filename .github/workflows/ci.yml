@@ -40,16 +40,27 @@ jobs:
       - run: ./scripts/smoke-test.sh
   build:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v7
 
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v4
 
+      - name: Login to ghcr
+        uses: docker/login-action
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build backend image
         uses: docker/build-push-action@v7
         with:
-          push: false
+          push: true
+          tags: |
+            ghcr.io/ivandjuka77/link-shortener-backend:${{ github.sha }}
+            ghcr.io/ivandjuka77/link-shortener-backend:latest
           context: backend
           cache-from: type=gha,scope=backend
           cache-to: type=gha,mode=max,scope=backend
@@ -57,7 +68,10 @@ jobs:
       - name: Build frontend image
         uses: docker/build-push-action@v7
         with:
-          push: false
+          push: true
+          tags: |
+            ghcr.io/ivandjuka77/link-shortener-frontend:${{ github.sha }}
+            ghcr.io/ivandjuka77/link-shortener-frontend:latest
           context: frontend
           cache-from: type=gha,scope=frontend
           cache-to: type=gha,mode=max,scope=frontend

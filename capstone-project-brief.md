@@ -137,7 +137,7 @@ A GitHub repo with: the app code, Dockerfiles, docker-compose.yml, the GitHub Ac
 - [x] Lint stage (even basic — eslint, black, whatever fits your stack)
 - [x] Test stage — at minimum, a smoke test hitting your two API endpoints
   - Spin up the app via docker compose inside the CI job itself if possible, not just unit tests
-- [ ] Build stage — builds the Docker image using the caching you set up during the CI/CD stage
+- [x] Build stage — builds the Docker image using the caching you set up during the CI/CD stage
 - [ ] Push stage — pushes to GHCR, tagged with git SHA, only on main
 
 ### Deployment job
