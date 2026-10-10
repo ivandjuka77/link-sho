@@ -46,10 +46,18 @@ jobs:
       - name: Set up Buildx
       - uses: docker/setup-buildx-action@v4
 
-      - name: Build image
+      - name: Build backend image
       - uses: docker/build-push-action@v7
         with:
           push: false
           context: backend
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build frontend image
+      - uses: docker/build-push-action@v7
+        with:
+          push: false
+          context: frontend
           cache-from: type=gha
           cache-to: type=gha,mode=max
