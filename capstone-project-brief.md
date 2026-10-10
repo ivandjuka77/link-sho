@@ -116,7 +116,7 @@ A GitHub repo with: the app code, Dockerfiles, docker-compose.yml, the GitHub Ac
 ### Registry & versioning
 
 - [x] Images pushed to GHCR (GitHub Container Registry)
-- [ ] Tagging strategy: git SHA + latest, never latest alone — moved to CI/CD (Push stage)
+- [x] Tagging strategy: git SHA + latest, never latest alone — moved to CI/CD (Push stage)
   - [x] Confirm you can pull and run a specific historical version by SHA
 
 ### Incident drills (required — document each)
@@ -138,7 +138,7 @@ A GitHub repo with: the app code, Dockerfiles, docker-compose.yml, the GitHub Ac
 - [x] Test stage — at minimum, a smoke test hitting your two API endpoints
   - Spin up the app via docker compose inside the CI job itself if possible, not just unit tests
 - [x] Build stage — builds the Docker image using the caching you set up during the CI/CD stage
-- [ ] Push stage — pushes to GHCR, tagged with git SHA, only on main
+- [x] Push stage — pushes to GHCR, tagged with git SHA, only on main
 
 ### Deployment job
 
