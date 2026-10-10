@@ -51,13 +51,13 @@ jobs:
         with:
           push: false
           context: backend
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,context=backend
+          cache-to: type=gha,mode=max,context=backend
 
       - name: Build frontend image
         uses: docker/build-push-action@v7
         with:
           push: false
           context: frontend
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,context=frontend
+          cache-to: type=gha,mode=max,context=frontend
