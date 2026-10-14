@@ -20,6 +20,12 @@ error() {
     exit 1
 }
 
+check_root() {
+    if [ "$EUID" -ne 0 ]; then
+        error "Please run the script with root user."
+    fi
+}
+
 create_user() {
     if id "$DEPLOY_USER" >/dev/null 2>&1; then
         log "User $DEPLOY_USER already exists."
@@ -54,12 +60,14 @@ setup_ssh_keys() {
     done
 }
 
-log "user ID is $EUID"
+enable_unattended_upgrades() {
+    # Install unattended upgrades package
+    apt-get install -y unattended-upgrades
 
-check_root() {
-    if [ "$EUID" -ne 0 ]; then
-        error "Please run the script with root user."
-    fi
+    cat > /etc/apt/apt.conf.d/20auto-upgrades << 'EOF'
+    APT::Periodic::Update-Package-Lists "1";
+    APT::Periodic::Unattended-Upgrade "1";
+    EOF
 }
 
 main() {
