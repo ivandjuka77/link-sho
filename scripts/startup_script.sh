@@ -21,7 +21,37 @@ error() {
 }
 
 create_user() {
-    echo "123"
+    if id "$DEPLOY_USER" >/dev/null 2>&1; then
+        log "User $DEPLOY_USER already exists."
+    else
+        log "User $DEPLOY_USER doesn't exist, creating user..."
+        # Create user with home and set shell to bash
+        useradd -m -s /bin/bash "$DEPLOY_USER"
+        log "User created successfully."
+    fi
+}
+
+setup_ssh_keys() {
+    local auth_keys="/home/$DEPLOY_USER/.ssh/authorized_keys"
+    local key
+
+    log "Setting up SSH keys for $DEPLOY_USER..."
+
+    # sshd ignores these files if the owner or modes are wrong
+    install -d -m 700 -o "$DEPLOY_USER" -g "$DEPLOY_USER" "/home/$DEPLOY_USER/.ssh"
+    touch "$auth_keys"
+    chmod 600 "$auth_keys"
+    chown "$DEPLOY_USER:$DEPLOY_USER" "$auth_keys"
+
+    # Add each key only if it isn't there yet, so re-runs don't duplicate it
+    for key in "$CI_PUBLIC_KEY" "$MY_PUBLIC_KEY"; do
+        if grep -qxF "$key" "$auth_keys"; then
+            log "Key already present, skipping."
+        else
+            echo "$key" >> "$auth_keys"
+            log "Key added."
+        fi
+    done
 }
 
 log "user ID is $EUID"
@@ -32,10 +62,10 @@ check_root() {
     fi
 }
 
-
 main() {
     check_root
     create_user
+    setup_ssh_keys
     echo "All passed"
     exit 0
 }
