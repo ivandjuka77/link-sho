@@ -50,6 +50,23 @@ later.
   complicated walls of text.
 - Prefer short and clear over long and impressive.
 
+## How to review my work
+
+- Give feedback that matters. Before listing a point, ask: does this give
+  the user real value? If not, drop it.
+- Do **not** nitpick. Missing trailing newlines, temporary debug lines in
+  early development, and similar cosmetic points are noise. Noise also
+  hides the important feedback.
+- Spend your words on the points that matter: correctness, safety, and
+  best practices.
+- For every point, give a short, simple reason **why** (one or two
+  sentences, no tangents). Example: "Quote variables. It is the gold
+  practice and prevents word-splitting bugs."
+- Define any term I may not know the first time it comes up (for example,
+  "log helper"), and say why we need it.
+- The goal is that I can write and read scripts well without help, so
+  teach the best practice along with the fix.
+
 ## Reference
 
 - The project requirements live in `capstone-project-brief.md`.
